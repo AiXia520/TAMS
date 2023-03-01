@@ -51,12 +51,15 @@ CUDA_VISIBLE_DEVICES=0 python3 main_mim.py --train_batch_size 32 --dataset offic
 ### Attention Map Visualization:
 ```
 python visualize.py --dataset office --name wa --num_classes 31 --img_size 256
-
+```
 
 Our code is largely borrowed from 
 [TVT](https://github.com/uta-smile/TVT)
 [CDAN](https://github.com/thuml/CDAN) 
 [ViT-pytorch](https://github.com/jeonsworld/ViT-pytorch)
 
-
+### t-SNE Visualization:
+<p align="left"> 
+<img width="500" src="https://github.com/AiXia520/TAMS/utils/fig6.png">
+</p>
 

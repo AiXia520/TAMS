@@ -31,11 +31,32 @@ Download the following models and put them in `checkpoint/`
 - ViT-B_16 [(ImageNet-21K)](https://storage.cloud.google.com/vit_models/imagenet21k/ViT-B_16.npz?_ga=2.49067683.-40935391.1637977007)
 - ViT-B_16 [(ImageNet)](https://console.cloud.google.com/storage/browser/_details/vit_models/sam/ViT-B_16.npz;tab=live_object)
 
+### Training:
+Add the source-only code. An example on `Office-31` dataset is as follows, where `dslr` is the source domain, `webcam` is the target domain:
+```
+CUDA_VISIBLE_DEVICES=0 python train.py --train_batch_size 64 --dataset office --name dw_source_only --train_list data/office/dslr_list.txt --test_list data/office/webcam_list.txt --num_classes 31 --model_type ViT-B_16 --pretrained_dir checkpoint/ViT-B_16.npz --num_steps 5000 --img_size 256
+```
+TAMS training:
+
+CUDA_VISIBLE_DEVICES=0 python3 main_mim.py --train_batch_size 32 --dataset office --name aw --source_list data/office/amazon_list.txt --target_list data/office/webcam_list.txt --test_list data/office/webcam_list.txt --num_classes 31 --model_type ViT-B_16 --pretrained_dir checkpoint/ViT-B_16.npz --num_steps 5000 --img_size 256 --beta 0.1 --gamma 0.01 --use_im --theta 0.1 --deta 0.1 --eta 0.1 --mask_ratio 0.4 --conf_threshold 0.7
+
+CUDA_VISIBLE_DEVICES=0 python3 main_mim.py --train_batch_size 32 --dataset office --name dw --source_list data/office/dslr_list.txt --target_list data/office/webcam_list.txt --test_list data/office/webcam_list.txt --num_classes 31 --model_type ViT-B_16 --pretrained_dir checkpoint/ViT-B_16.npz --num_steps 5000 --img_size 256 --beta 0.1 --gamma 0.01 --use_im --theta 0.1 --deta 0.1 --eta 0.1 --mask_ratio 0.4 --conf_threshold 0.7
+
+CUDA_VISIBLE_DEVICES=0 python3 main_mim.py --train_batch_size 32 --dataset office --name ad --source_list data/office/amazon_list.txt --target_list data/office/dslr_list.txt --test_list data/office/dslr_list.txt --num_classes 31 --model_type ViT-B_16 --pretrained_dir checkpoint/ViT-B_16.npz --num_steps 5000 --img_size 256 --beta 0.1 --gamma 0.01 --use_im --theta 0.1 --deta 0.1 --eta 0.1 --mask_ratio 0.4 --conf_threshold 0.7
+
+CUDA_VISIBLE_DEVICES=0 python3 main_mim.py --train_batch_size 32 --dataset office --name da --source_list data/office/dslr_list.txt --target_list data/office/amazon_list.txt --test_list data/office/amazon_list.txt  --num_classes 31 --model_type ViT-B_16 --pretrained_dir checkpoint/ViT-B_16.npz --num_steps 5000 --img_size 256 --beta 0.1 --gamma 0.01 --use_im --theta 0.1 --deta 0.1 --eta 0.1 --mask_ratio 0.4 --conf_threshold 0.7
+
+CUDA_VISIBLE_DEVICES=0 python3 main_mim.py --train_batch_size 32 --dataset office --name wa --source_list data/office/webcam_list.txt --target_list data/office/amazon_list.txt --test_list data/office/amazon_list.txt --num_classes 31 --model_type ViT-B_16 --pretrained_dir checkpoint/ViT-B_16.npz --num_steps 5000 --img_size 256 --beta 0.1 --gamma 0.01 --use_im --theta 0.1 --deta 0.1 --eta 0.1 --mask_ratio 0.4 --conf_threshold 0.7
+
+### Attention Map Visualization:
+```
+python visualize.py --dataset office --name wa --num_classes 31 --img_size 256
 
 
-
-
-
+Our code is largely borrowed from 
+[TVT](https://github.com/uta-smile/TVT)
+[CDAN](https://github.com/thuml/CDAN) 
+[ViT-pytorch](https://github.com/jeonsworld/ViT-pytorch)
 
 
 

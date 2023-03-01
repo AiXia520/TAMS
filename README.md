@@ -60,6 +60,6 @@ Our code is largely borrowed from
 
 ### t-SNE Visualization:
 <p align="left"> 
-<img width="500" src="https://github.com/AiXia520/TAMS/utils/fig6.png">
+<img width="500" src="https://github.com/AiXia520/TAMS/tree/main/utils/fig6.png">
 </p>
 
